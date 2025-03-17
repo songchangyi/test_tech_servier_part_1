@@ -15,8 +15,8 @@ in order to generate a joint vision which allows us to better understanding thei
 ### Description of the scripts
 1. `main.py` (**answer for Task 3**) : Python file contains a data pipeline in Pyspark which transform 
    different input data (in .csv and .json) to an output table in .json format. 
-   Use `poetry run python py_pipeline/etl/main.py` to run.
-
+- Install dependencies : `poetry install`
+- Run pipeline : `poetry run python py_pipeline/etl/main.py`
 2. Other commands
 - Black : `poetry run black .`
 - Pylint : `poetry run pylint py_pipeline/etl/`
@@ -50,26 +50,3 @@ The following pipeline is used :
 #### Further improvements (answer for question 6)
 As Apache Spark is designed for large-scale data processing, it can handle a large volume of data. 
 However, it is still important to configure the cluster and jobs according to business needs.
-
-## Part II : SQL
-
-### Objective
-Use SQL to perform data analysis as demanded.
-
-### Description of the scripts
-1. sql_query_task_1.sql (**answer for Task 1**) : calculate total ventes by date. 
-   - Expected output :
-   
-   | date       | ventes |
-   |------------|--------|
-   | 2020-01-01 | 524.24 |
-   
-2. sql_query_task_2.sql (**answer for Task 2**): calculate total ventes on different product types by client. 
-   - Expected output :
-   
-   | client_id | ventes_meuble | ventes_deco |
-   |-----------|---------------|-------------|
-   | 999       | 50.0          | 14.24       |
-   | 845       | 400.0         | 60.00       |
-   
-3. create_db.sql : SQL script to create database and tables using example data. 
