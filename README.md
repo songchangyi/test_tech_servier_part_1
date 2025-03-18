@@ -20,7 +20,7 @@ in order to generate a joint vision which allows us to better understanding thei
 2. Other commands
 - Black : `poetry run black .`
 - Pylint : `poetry run pylint py_pipeline/etl/`
-- Ruff : `poetry run ruff format . --check`
+- Ruff : `poetry run ruff format .`
 - Run tests : `poetry run pytest py_pipeline/tests/`
 
 ### Output data view

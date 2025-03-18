@@ -34,9 +34,7 @@ def read_json(spark: SparkSession, file_path: str):
     match = re.search(r"\},\n\]", content)
     if match:  # the file is corrupted when matched
         fixed_content = re.sub(r"\},\n\]", "}\n]", content)  # remove the last comma
-        with tempfile.NamedTemporaryFile(
-            delete=False, mode="w", suffix=".json"
-        ) as temp_file:
+        with tempfile.NamedTemporaryFile(delete=False, mode="w", suffix=".json") as temp_file:
             temp_file.write(fixed_content)
         df = spark.read.json(temp_file.name, multiLine="true")
     else:

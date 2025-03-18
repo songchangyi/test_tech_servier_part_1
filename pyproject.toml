@@ -1,8 +1,12 @@
 [tool.poetry]
-name = "test_tech_servier"
+name = "test_tech_servier_part_1"
 version = "0.1.0"
 description = ""
 authors = ["changyi <song.c@sfeir.com>"]
+
+packages = [
+  { include = "py_pipeline" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"

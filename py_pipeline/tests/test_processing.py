@@ -4,7 +4,7 @@ import pytest
 
 from pyspark.sql import SparkSession
 
-from etl import processing
+from py_pipeline.etl import processing
 
 
 # -----------------------------------------------------------------------------
@@ -12,11 +12,7 @@ from etl import processing
 # -----------------------------------------------------------------------------
 @pytest.fixture(scope="session")
 def spark():
-    spark = (
-        SparkSession.builder.master("local[2]")
-        .appName("ETL Functions Tests")
-        .getOrCreate()
-    )
+    spark = SparkSession.builder.master("local[2]").appName("ETL Functions Tests").getOrCreate()
     yield spark
     spark.stop()
 

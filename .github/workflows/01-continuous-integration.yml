@@ -1,0 +1,41 @@
+name: 01-continuous-integration
+run-name: 'CI for branch ${{ github.ref_name }}'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  continous-integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+  
+      - name: Add Poetry to PATH
+        run: echo "${HOME}/.local/bin" >> $GITHUB_PATH
+  
+      - name: Install Dependencies
+        run: poetry install
+  
+      - name: Run Black
+        run: poetry run black .
+  
+      - name: Run Pylint
+        run: poetry run pylint py_pipeline/etl/
+  
+      - name: Run Tests with Pytest
+        run: poetry run pytest py_pipeline/tests/

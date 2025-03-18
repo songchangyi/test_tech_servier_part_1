@@ -6,7 +6,11 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import lower, col
 from loguru import logger
 from dotenv import load_dotenv
-from processing import data_cleaning, read_file, write_to_json # pylint: disable=import-error
+from processing import (
+    data_cleaning,
+    read_file,
+    write_to_json,
+)  # pylint: disable=import-error
 
 
 load_dotenv()
@@ -44,9 +48,7 @@ def main():
 
     # Step 3 : join
     df_ref = reduce(lambda df1, df2: df1.unionByName(df2), dfs)
-    df_res = df_ref.join(
-        df_drugs, df_ref.title_low.contains(df_drugs.drug_low), how="left"
-    )
+    df_res = df_ref.join(df_drugs, df_ref.title_low.contains(df_drugs.drug_low), how="left")
 
     # Step 4 : format result
     columns_to_drop = ["title_low", "drug_low"]
@@ -55,9 +57,7 @@ def main():
     df_res.show()
 
     # Step 5 : Save results
-    output_path = os.path.join(
-        os.getenv("OUTPUT_PATH"), os.getenv("FILE_OUTPUT_RESULTS")
-    )
+    output_path = os.path.join(os.getenv("OUTPUT_PATH"), os.getenv("FILE_OUTPUT_RESULTS"))
     logger.info(f"Saving results to '{output_path}'")
     write_to_json(df_res, output_path)
     logger.info("ETL job finished !")
